@@ -5,11 +5,12 @@
 
 using TheBalance.Domain.Commons;
 
-namespace TheBalance.Domain.Entities.Expenses
+namespace TheBalance.Domain.Entities.Incomes
 {
-    public class ExpenseSummary : TransactionSummary
+    public class Income : Transaction
     {
         //Relationship
-        public virtual ICollection<Expense> Expenses { get; set; }
+        public int IncomeSummaryId { get; set; }
+        public IncomeSummary IncomeSummary { get; set; }
     }
 }
