@@ -1,4 +1,9 @@
-﻿namespace TheBalance.Domain.Commons
+﻿//--------------------------------------------------
+// Copyright (c) Coalition of Good-Hearted Engineers
+// Developed by TheBalance Team
+//--------------------------------------------------
+
+namespace TheBalance.Domain.Commons
 {
     public class TransactionSummary : Auditable
     {
