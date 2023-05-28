@@ -11,7 +11,7 @@ namespace TheBalance.Data.IRepositories
     {
         ValueTask<T> CreateAsync(T entity);
         T Update(T entity);
-        ValueTask<T> DeleteAsync(Expression<Func<T, bool>> expression);
+        ValueTask<bool> DeleteAsync(Expression<Func<T, bool>> expression);
         ValueTask<T> GetAsync(Expression<Func<T, bool>> expression, string[] includes = null);
         IQueryable<T> GetAll(Expression<Func<T, bool>> expression,
             string[] includes = null,
