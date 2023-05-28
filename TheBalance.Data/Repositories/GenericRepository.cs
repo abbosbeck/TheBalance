@@ -31,7 +31,7 @@ namespace TheBalance.Data.Repositories
                 return false;
             else
             {
-                dbSet.Remove(entity); 
+                dbSet.Remove(entity);
                 return true;
             }
         }
@@ -40,14 +40,14 @@ namespace TheBalance.Data.Repositories
         {
             IQueryable<T> query = expression is null ? dbSet : dbSet.Where(expression);
 
-            if(includes != null)
+            if (includes != null)
             {
-                foreach(var include in includes)
-                    if(!string.IsNullOrEmpty(include))
+                foreach (var include in includes)
+                    if (!string.IsNullOrEmpty(include))
                         query = query.Include(include);
             }
 
-            if(!isTracking)
+            if (!isTracking)
                 query = query.AsNoTracking();
 
             return query;
