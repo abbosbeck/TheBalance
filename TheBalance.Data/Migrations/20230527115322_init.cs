@@ -1,4 +1,8 @@
-﻿using System;
+﻿//--------------------------------------------------
+// Copyright (c) Coalition of Good-Hearted Engineers
+// Developed by TheBalance Team
+//--------------------------------------------------
+
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
