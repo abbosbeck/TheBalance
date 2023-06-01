@@ -3,12 +3,11 @@
 // Developed by TheBalance Team
 //--------------------------------------------------
 
-using TheBalance.Service.DTOs.Expenses;
+using TheBalance.Service.DTOs.Incomes;
 
-namespace TheBalance.Service.Interfaces.Expenses
+namespace TheBalance.Service.Interfaces.Incomes
 {
-    public interface IExpenseSummary : IGenericService<ExpenseSummaryViewDTO, ExpenseSummaryCreateDTO>
+    public interface IIncomeService : IGenericService<IncomeForViewDTO, IncomeForCreateDTO>
     {
-        
     }
 }
