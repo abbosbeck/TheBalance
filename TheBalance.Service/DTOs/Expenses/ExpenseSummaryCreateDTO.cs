@@ -7,5 +7,7 @@ namespace TheBalance.Service.DTOs.Expenses
 {
     public class ExpenseSummaryCreateDTO
     {
+        public string Totals { get; set; }
+        public decimal Planned { get; set; }
     }
 }
