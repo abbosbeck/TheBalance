@@ -3,11 +3,10 @@
 // Developed by TheBalance Team
 //--------------------------------------------------
 
-namespace TheBalance.Service.DTOs.Incomes
+namespace TheBalance.Service.Interfaces
 {
-    public class IncomeSummaryForCreateDTO
+    public interface IExpenseService
     {
-        public string Totals { get; set; }
-        public decimal Planned { get; set; }
+
     }
 }
