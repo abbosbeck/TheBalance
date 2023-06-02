@@ -9,7 +9,7 @@ using TheBalance.Service.DTOs.Expenses;
 
 namespace TheBalance.Service.Interfaces.Expenses
 {
-    public interface IExpenseService : IGenericService<ExpenseForViewDTO,  ExpenseForCreateDTO>
+    public interface IExpenseService : IGenericService<Expense,  ExpenseForCreateDTO>
     {
     }
 }

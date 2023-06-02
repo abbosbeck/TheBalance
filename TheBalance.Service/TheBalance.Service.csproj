@@ -7,10 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\TheBalance.Data\TheBalance.Data.csproj" />
     <ProjectReference Include="..\TheBalance.Domain\TheBalance.Domain.csproj" />
   </ItemGroup>
 
