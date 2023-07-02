@@ -9,6 +9,6 @@ namespace TheBalance.Service.Interfaces
         ValueTask<IEnumerable<Tout>> GetAllAsync(Expression<Func<Tout, bool>> expression = null);
         ValueTask<Tout> CreateAsync(Tin expense);
         ValueTask<bool> DeleteAsync(long id);
-        ValueTask<Tout> UpdateAsync(long id, Tin dto);
+        ValueTask<Tout> UpdateAsync(int id, Tin dto);
     }
 }

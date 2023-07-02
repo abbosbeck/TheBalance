@@ -36,29 +36,21 @@ namespace TheBalance.Data.Repositories
             }
         }
 
-        public IQueryable<T> GetAll(Expression<Func<T, bool>> expression, string[] includes = null, bool isTracking = true)
+        public async Task<IEnumerable<T>> GetAllAsync()
         {
-            IQueryable<T> query = expression is null ? dbSet : dbSet.Where(expression);
-
-            if (includes != null)
-            {
-                foreach (var include in includes)
-                    if (!string.IsNullOrEmpty(include))
-                        query = query.Include(include);
-            }
-
-            if (!isTracking)
-                query = query.AsNoTracking();
-
-            return query;
+            return await dbSet.ToListAsync();
         }
-
-        public async ValueTask<T> GetAsync(Expression<Func<T, bool>> expression, string[] includes = null)
-            => await GetAll(expression, includes, false).FirstOrDefaultAsync();
         public T Update(T entity)
             => (dbSet.Update(entity)).Entity;
 
         public async ValueTask SaveChangesAsync()
             => await dbContext.SaveChangesAsync();
+
+        public async Task<T> GetById(int id)
+        {
+            var result = await dbSet.Where(x  => x.Id == id).FirstOrDefaultAsync();
+            
+            return result;
+        }
     }
 }

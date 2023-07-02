@@ -4,11 +4,10 @@
 //--------------------------------------------------
 
 using System.Linq.Expressions;
-using System.Net;
-using Microsoft.EntityFrameworkCore;
 using TheBalance.Data.IRepositories;
 using TheBalance.Domain.Entities.Expenses;
 using TheBalance.Service.DTOs.Expenses;
+using TheBalance.Service.Exceptions;
 using TheBalance.Service.Interfaces.Expenses;
 
 namespace TheBalance.Service.Services.Expenses
@@ -26,8 +25,7 @@ namespace TheBalance.Service.Services.Expenses
 
             if(createdExpense == null) 
             {
-                // throw better implementen expemtion
-                throw new InvalidOperationException();
+                throw new TheBalanceException(400, "Creation failed!");
             }
             await expenseRepository.SaveChangesAsync();
 
@@ -40,11 +38,7 @@ namespace TheBalance.Service.Services.Expenses
 
             if(!isDeleted)
             {
-                // HttpsStatusCodeExpetion qaytarilishi shart!
-
-                //throw new HttpStatusCodeExeption(400, "User not found!");
-
-                throw new InvalidOperationException();
+                throw new TheBalanceException(404, "Item not found!");
             }
             await expenseRepository.SaveChangesAsync();
             
@@ -53,19 +47,30 @@ namespace TheBalance.Service.Services.Expenses
 
         public async ValueTask<IEnumerable<Expense>> GetAllAsync(Expression<Func<Expense, bool>> expression = null)
         {
-            var expenses = expenseRepository.GetAll(expression).Include(x => x.ExpenseSummary);
+            var expenses = await expenseRepository.GetAllAsync();
 
             if(expenses == null)
             {
-                // throw exeption
+                throw new TheBalanceException(404, "Expenses not found!");
             }
 
             return expenses;
         }
 
-        public ValueTask<Expense> UpdateAsync(long id, ExpenseForCreateDTO dto)
+        public async ValueTask<Expense> UpdateAsync(int id, ExpenseForCreateDTO dto)
         {
-            throw new NotImplementedException();
+            var oldExpense = await expenseRepository.GetById(id);
+
+            if (oldExpense == null)
+                throw new TheBalanceException(404, "Expense not found!");
+            
+            oldExpense = (Expense)dto;
+
+            var newExpense = expenseRepository.Update(oldExpense);
+            await expenseRepository.SaveChangesAsync();
+
+            return newExpense;
+
         }
     }
 }
