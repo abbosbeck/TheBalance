@@ -4,6 +4,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TheBalance.Data.DbContexts;
+using TheBalance.Data.IRepositories;
+using TheBalance.Data.Repositories;
+using TheBalance.Domain.Entities.Expenses;
+using TheBalance.Service.Interfaces.Expenses;
+using TheBalance.Service.Services.Expenses;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +21,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContextPool<TheBalanceDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("TheBalanceDb")));
 
+builder.Services.AddTransient<IExpenseService, ExpenseService>();
+builder.Services.AddTransient<IGeneriRepository<Expense>, GenericRepository<Expense>>();
 
 var app = builder.Build();
 
