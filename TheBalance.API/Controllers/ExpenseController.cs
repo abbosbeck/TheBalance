@@ -25,9 +25,9 @@ namespace TheBalance.API.Controllers
 
         // GET api/ExpenseController
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            return "value";
+            return Ok(await expenseService.GetByIdAsync(id));
         }
 
         // POST api/ExpenseController/
@@ -37,7 +37,7 @@ namespace TheBalance.API.Controllers
             return Ok(await expenseService.CreateAsync(dto));    
         }
 
-        // PUT api/<ValuesController>/5
+        // PUT api/ExpenseController/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutExpense(
             [FromRoute]int id, 
@@ -46,10 +46,11 @@ namespace TheBalance.API.Controllers
             return Ok(await expenseService.UpdateAsync(id, expenseForCreateDTO));
         }
 
-        // DELETE api/<ValuesController>/5
+        // DELETE api/ExpenseController/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            return Ok(await expenseService.DeleteAsync(id));
         }
     }
 }
