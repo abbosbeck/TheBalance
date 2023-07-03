@@ -13,7 +13,9 @@ namespace TheBalance.Service.DTOs.Expenses
         public DateTime Date { get; set; }
         public double Amount { get; set; }
         public string Description { get; set; }
-        public IEnumerable<ExpenseForViewDTO> ExpenseSummary { get; set; }
+        
+        public int ExpenseSummaryId { get; set; }
+        //public IEnumerable<ExpenseForViewDTO> ExpenseSummary { get; set; }
 
         public static implicit operator Expense(ExpenseForCreateDTO dto)
         {
@@ -22,6 +24,7 @@ namespace TheBalance.Service.DTOs.Expenses
                 Amount = dto.Amount,
                 Description = dto.Description,
                 Date = dto.Date,
+                ExpenseSummaryId = dto.ExpenseSummaryId,
             };
         }
     }

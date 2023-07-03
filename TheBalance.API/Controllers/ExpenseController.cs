@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using TheBalance.Domain.Entities.Expenses;
+using TheBalance.Service.DTOs.Expenses;
 using TheBalance.Service.Interfaces.Expenses;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TheBalance.API.Controllers
 {
@@ -20,28 +18,32 @@ namespace TheBalance.API.Controllers
 
         // GET: api/ExpenseController
         [HttpGet]
-        public async Task<IEnumerable<Expense>> GetAllExpense()
+        public async Task<IActionResult> GetAllExpense()
         {
-            return await expenseService.GetAllAsync();
+            return Ok(await expenseService.GetAllAsync());
         }
 
-        // GET api/<ValuesController>/5
+        // GET api/ExpenseController
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<ValuesController>
+        // POST api/ExpenseController/
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> PostExpense(ExpenseForCreateDTO dto)
         {
+            return Ok(await expenseService.CreateAsync(dto));    
         }
 
         // PUT api/<ValuesController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> PutExpense(
+            [FromRoute]int id, 
+            [FromQuery] ExpenseForCreateDTO expenseForCreateDTO)
         {
+            return Ok(await expenseService.UpdateAsync(id, expenseForCreateDTO));
         }
 
         // DELETE api/<ValuesController>/5

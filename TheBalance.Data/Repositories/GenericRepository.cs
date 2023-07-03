@@ -40,8 +40,13 @@ namespace TheBalance.Data.Repositories
         {
             return await dbSet.ToListAsync();
         }
-        public T Update(T entity)
-            => (dbSet.Update(entity)).Entity;
+        public T UpdateAsync(T entity)
+        {
+            var result = dbSet.Update(entity).Entity;
+            
+            return result;
+
+        }
 
         public async ValueTask SaveChangesAsync()
             => await dbContext.SaveChangesAsync();
