@@ -59,11 +59,6 @@ namespace TheBalance.Service.Services.Expenses
 
         public async ValueTask<Expense> UpdateAsync(int id, ExpenseForCreateDTO dto)
         {
-            //var oldExpense = await expenseRepository.GetById(id);
-
-            /*if (oldExpense == null)
-                throw new TheBalanceException(404, "Expense not found!");
-            */
             var newExpense = new Expense();
             newExpense = (Expense)dto;
             newExpense.Id = id;
@@ -71,7 +66,7 @@ namespace TheBalance.Service.Services.Expenses
             var result = expenseRepository.UpdateAsync(newExpense);
             await expenseRepository.SaveChangesAsync();
 
-            return newExpense;
+            return result;
 
         }
     }
